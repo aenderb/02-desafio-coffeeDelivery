@@ -16,8 +16,29 @@ import {
   OrderInfo,
   OrderMsg,
 } from './styles'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { OrderData } from '../Cart'
+import { useEffect } from 'react'
+
+interface ILocation {
+  state: OrderData
+}
 
 export function OrderConfirmed() {
+  const { state } = useLocation() as unknown as ILocation
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!state) {
+      navigate('/')
+    }
+  }, [])
+
+  if (!state) {
+    return <></>
+  }
+
   return (
     <OrderContainer>
       <OrderInfo>
@@ -30,8 +51,11 @@ export function OrderConfirmed() {
                 <MapPin color="white" size={16} weight="fill" />
               </IconBrackgroundLocal>
               <DescriptionLocal>
-                Entrega em <b> Rua João Daniel Martinelli, 102 </b> Farrapos -
-                Porto Alegre, RS
+                Entrega em{' '}
+                <b>
+                  {state.street}, {state.number}
+                </b>{' '}
+                {state.district} - {state.city}, {state.uf}
               </DescriptionLocal>
             </OrderDetailsLocal>
             <OrderDetailsTime>
@@ -47,7 +71,7 @@ export function OrderConfirmed() {
                 <CurrencyDollar color="white" size={16} weight="fill" />
               </IconBrackgroundPayment>
               <DescriptionPayment>
-                Pagamento na entrega <b> Cartão de Crédito </b>
+                Pagamento na entrega <b> {state.paymentMethod} </b>
               </DescriptionPayment>
             </OrderDetailsPayment>
           </OrderDetailsBox>

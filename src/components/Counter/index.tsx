@@ -5,21 +5,24 @@ import {
   MinusButton,
   PlusButton,
 } from './styles'
-import { useState } from 'react'
 
-export function Counter() {
-  const [counter, SetCounter] = useState(1)
+interface ICounterProps {
+  count: number
+  onIncrement: () => void
+  onDecrement: () => void
+}
 
+export function Counter({ onIncrement, onDecrement, count }: ICounterProps) {
   return (
     <CoffeeListCardBuyCounter>
       <CounterSpan>
-        <MinusButton onClick={() => SetCounter(counter - 1)}>
+        <MinusButton type="button" onClick={onDecrement}>
           <Minus size={14} color="#8047F8" />
         </MinusButton>
 
-        {counter}
+        {count}
 
-        <PlusButton onClick={() => SetCounter(counter + 1)}>
+        <PlusButton type="button" onClick={onIncrement}>
           <Plus size={14} color="#8047F8" />
         </PlusButton>
       </CounterSpan>

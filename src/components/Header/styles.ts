@@ -75,6 +75,7 @@ export const HeaderContainer = styled.div`
       padding: 8px;
       gap: 4px;
       isolation: isolate;
+      position: relative
 
       width: 38px;
       height: 38px;
@@ -89,6 +90,39 @@ export const HeaderContainer = styled.div`
       flex: none;
       order: 1;
       flex-grow: 0;
+    }
+
+    span#q {
+      /* Counter */
+
+      /* Auto layout */
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: 150px;
+      top: 20px;
+      color: white;
+      font-weight: 700;
+      font-family: "roboto";
+      font-size: 12px;
+      /* Brand / Yellow Dark */
+
+      background: #c47f17;
+      border-radius: 1000px;
+
+      /* Inside auto layout */
+
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+      z-index: 1;
     }
   }
 `
