@@ -41,7 +41,7 @@ import {
   RuaInput,
   UFInput,
 } from './styles'
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 
 import { CartCoffeeList } from './components/CartCoffeeList'
 import { CartContext } from '../../contexts/CartContext'
@@ -69,6 +69,8 @@ export type OrderData = zod.infer<typeof cartFilledSchema>
 type TOrderFormData = OrderData
 
 export function Cart() {
+  const btnPaymentRef = useRef<HTMLButtonElement>(null)
+
   const [value, setValue] = React.useState('')
 
   const { cartItems, cartQuantity, cartCoffeeTotal, resetCart } =
@@ -96,7 +98,8 @@ export function Cart() {
       navigate('/success', { state: data })
       resetCart()
     } else {
-      alert('informe o metodo de pagamento')
+      // alert('informe o metodo de pagamento')
+      btnPaymentRef.current?.focus()
     }
   }
 
@@ -161,6 +164,7 @@ export function Cart() {
               {...register('paymentMethod')}
             >
               <CartFramePaymentButtonCredit
+                ref={btnPaymentRef}
                 id="payment"
                 value="Cartão de crédito"
               >
